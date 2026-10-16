@@ -7,5 +7,8 @@ When **sustenance** or **hydration** drops below **50**, automatically consume o
 - Respects the game's ~2 s use delay (won't spam)
 - Skips potions and openable loot packs
 - Does not touch chests
+- Polls every 3s (lightweight; avoids hitching)
 
 Requires [UE4SS for RSDragonwilds](https://www.nexusmods.com/runescapedragonwilds/mods/4).
+
+Check `ue4ss\UE4SS.log` for `[TeflonTed.AutoEat]` lines after loading a world — you should see `SustenanceComponent` / `HydrationComponent` values.

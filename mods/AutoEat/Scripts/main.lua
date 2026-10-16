@@ -2,10 +2,10 @@
 -- When sustenance or hydration < 50, consume one food/drink from inventory.
 
 local TAG = "[TeflonTed.AutoEat] "
-local VERSION = "1.0.0"
+local VERSION = "1.1.0"
 local THRESHOLD = 50
-local POLL_MS = 500
-local USE_COOLDOWN = 2.25  -- game food/drink gate is ~2 s
+local POLL_MS = 3000          -- was 500; FindAllOf+attr spam caused ~1s hitches
+local USE_COOLDOWN = 2.25
 
 local function setupPath()
     local src = (debug.getinfo(1, "S").source or ""):gsub("^@", "")
@@ -19,6 +19,7 @@ setupPath()
 local U = require("teflonted.util")
 local Inv = require("teflonted.inventory")
 local Food = require("teflonted.consumable")
+local Survival = require("teflonted.survival")
 
 local function log(msg)
     print(TAG .. tostring(msg) .. "\n")
@@ -26,45 +27,15 @@ end
 
 local S = {
     nextUseAt = 0,
-    warnedAttr = false,
-    warnedGuest = false,
-    sustAttr = nil,
-    hydrAttr = nil,
     readyAt = nil,
     world = nil,
+    discoverTries = 0,
+    loggedSlots = false,
+    lastWarn = 0,
 }
-
-local ATTR_CANDIDATES = {
-    sustenance = {
-        "SustenanceAttribute", "Sustenance", "FoodAttribute", "HungerAttribute",
-        "PlayerSustenanceAttribute",
-    },
-    hydration = {
-        "HydrationAttribute", "Hydration", "ThirstAttribute", "WaterAttribute",
-        "PlayerHydrationAttribute",
-    },
-}
-
-local function resolveAttr(pawn, kind)
-    local cached = (kind == "sustenance") and S.sustAttr or S.hydrAttr
-    if cached then
-        local v = U.readAttr(pawn, cached)
-        if v ~= nil then return cached, v end
-    end
-    for _, name in ipairs(ATTR_CANDIDATES[kind]) do
-        local v = U.readAttr(pawn, name)
-        if v ~= nil then
-            if kind == "sustenance" then S.sustAttr = name else S.hydrAttr = name end
-            log("using attribute " .. name .. " for " .. kind)
-            return name, v
-        end
-    end
-    return nil, nil
-end
 
 local function findConsumableSlot(bag, kind)
     local last = math.min(Inv.BAG_MAIN_LAST, Inv.slotCount(bag) - 1)
-    -- Prefer hotbar first, then main backpack.
     for i = 0, last do
         local ok, d, n = Inv.readSlot(bag, i)
         if ok and d and n and n > 0 and Food.isKind(d, kind) then
@@ -74,10 +45,23 @@ local function findConsumableSlot(bag, kind)
     return nil, nil
 end
 
+local function logHotbarOnce(bag)
+    if S.loggedSlots then return end
+    S.loggedSlots = true
+    local last = math.min(Inv.BAG_MAIN_LAST, Inv.slotCount(bag) - 1)
+    for i = 0, last do
+        local ok, d, n = Inv.readSlot(bag, i)
+        if ok and d and n and n > 0 then
+            log(string.format("inv[%d] x%d %s", i, n, Food.describe(d)))
+        end
+    end
+end
+
 local function tryConsume(pc, bag, kind, value)
     local slot, data = findConsumableSlot(bag, kind)
-    if not slot then
-        log(string.format("%s at %.0f but no %s in inventory", kind, value, kind))
+    if slot == nil then
+        log(string.format("%s at %.1f but no %s found in hotbar/backpack", kind, value, kind))
+        logHotbarOnce(bag)
         return false
     end
     local before = Inv.countOf(bag, data)
@@ -86,10 +70,8 @@ local function tryConsume(pc, bag, kind, value)
         log("UseItemFromInventory failed: " .. tostring(err))
         return false
     end
-    local name = Inv.itemDisplay(data)
-    log(string.format("used %s for %s (was %.0f)", name, kind, value))
+    log(string.format("used %s for %s (was %.1f) slot=%d", Inv.itemDisplay(data), kind, value, slot))
     S.nextUseAt = os.clock() + USE_COOLDOWN
-    -- Soft verify: stack should drop if the use consumed a charge.
     if before then
         local after = Inv.countOf(bag, data)
         if after and after >= before then
@@ -103,25 +85,35 @@ local function tick()
     local pc = U.localPC()
     if not pc then
         S.world, S.readyAt = nil, nil
+        Survival.reset()
+        S.discoverTries, S.loggedSlots = 0, false
         return
     end
     local wkey = U.full(pc)
     pcall(function() wkey = wkey .. "|" .. U.full(pc:GetWorld()) end)
     if wkey ~= S.world then
-        S.world, S.readyAt = wkey, os.clock() + 8
-        S.sustAttr, S.hydrAttr = nil, nil
+        S.world, S.readyAt = wkey, os.clock() + 6
+        Survival.reset()
+        S.discoverTries, S.loggedSlots = 0, false
     end
     if S.readyAt and os.clock() < S.readyAt then return end
     if U.uiBlocking(pc) then return end
+
     local pawn = U.playerPawn(pc)
     if not pawn then return end
     local hp = U.readAttr(pawn, "HealthAttribute")
     if hp ~= nil and hp <= 0 then return end
 
-    if not U.isHost(pc) then
-        if not S.warnedGuest then
-            S.warnedGuest = true
-            log("joined world: AutoEat still tries client UseItemFromInventory; if nothing happens, use solo/host")
+    if not Survival.isDiscovered() then
+        if S.discoverTries < 5 then
+            S.discoverTries = S.discoverTries + 1
+            Survival.discover(pawn, log)
+        elseif os.clock() - S.lastWarn > 30 then
+            S.lastWarn = os.clock()
+            log("still no sustenance/hydration reader; will keep trying slowly")
+            S.discoverTries = 0
+        else
+            return
         end
     end
 
@@ -129,17 +121,17 @@ local function tick()
     if not bag then return end
     if os.clock() < S.nextUseAt then return end
 
-    local _, sust = resolveAttr(pawn, "sustenance")
-    local _, hydr = resolveAttr(pawn, "hydration")
+    local sust, hydr = Survival.read(pawn)
     if sust == nil and hydr == nil then
-        if not S.warnedAttr then
-            S.warnedAttr = true
-            log("could not read Sustenance/Hydration attributes yet (still loading, or names changed)")
+        if os.clock() - S.lastWarn > 30 then
+            S.lastWarn = os.clock()
+            log("survival values unread (nil,nil)")
+            Survival.reset()
+            S.discoverTries = 0
         end
         return
     end
 
-    -- One consume per tick; food first if both low.
     if sust ~= nil and sust < THRESHOLD then
         tryConsume(pc, bag, "food", sust)
         return
@@ -168,4 +160,4 @@ if not okLoop then
     end)
 end
 
-log("loaded v" .. VERSION .. string.format(" — auto eat/drink below %d", THRESHOLD))
+log("loaded v" .. VERSION .. string.format(" — auto eat/drink below %d (poll %dms)", THRESHOLD, POLL_MS))

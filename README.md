@@ -26,13 +26,18 @@ A GitHub experimental UE4SS build may work for development; prefer the Nexus Dra
 
 1. Install UE4SS into `Binaries\Win64\` (Nexus [mod 4](https://www.nexusmods.com/runescapedragonwilds/mods/4), or `.\Install-UE4SS.ps1 -ZipPath ...`).
 2. Copy `Environment.ps1.example` → `Environment.ps1` (already set for the default Steam path).
-3. Deploy:
+3. Double-click `Launch-Dragonwilds.bat` (deploys mods, then starts the game).
+
+```text
+Launch-Dragonwilds.bat              deploy + launch
+Launch-Dragonwilds.bat -SkipDeploy  launch only (mods already deployed)
+```
+
+Or deploy without launching:
 
 ```powershell
 .\Deploy-Mods.ps1
 ```
-
-Or double-click `Launch-Dragonwilds.bat` (deploys, then starts the game).
 
 4. Confirm in `Binaries\Win64\ue4ss\UE4SS.log`:
 
