@@ -1,0 +1,18 @@
+## Local install path (copy from Environment.ps1.example)
+Environment.ps1
+
+## Scratch / research downloads
+.tmp-*/
+.tmp-research/
+
+## IDE / OS
+.vs/
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+## Logs / dumps
+*.log
+UE4SS_ObjectDump*
+SDK/

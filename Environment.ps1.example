@@ -1,0 +1,4 @@
+# Copy this file to Environment.ps1 (gitignored) and set your install path.
+# Path should be the inner RSDragonwilds folder that contains Binaries\Win64.
+
+$DRAGONWILDS_INSTALL = "C:\Program Files (x86)\Steam\steamapps\common\RSDragonwilds\RSDragonwilds"
