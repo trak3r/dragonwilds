@@ -38,8 +38,28 @@ if (-not (Test-Path $modsFile)) {
     Set-Content -Path $modsFile -Value ""
 }
 
+# UnInteract is under development / do not use — never deploy it.
 $modNames = @("SortIntoChests", "AutoEat")
+$disabledMods = @("UnInteract")
 $commonSrc = Join-Path $repoRoot "common"
+
+foreach ($name in $disabledMods) {
+    $dest = Join-Path $modsDir $name
+    if (Test-Path $dest) {
+        Remove-Item $dest -Force -Recurse
+        Write-Host "Removed disabled mod from game: $name"
+    }
+    if (Test-Path $modsFile) {
+        $lines = Get-Content $modsFile -ErrorAction SilentlyContinue
+        if ($lines) {
+            $kept = $lines | Where-Object { $_ -notmatch ("^\s*" + [regex]::Escape($name) + "\s*:") }
+            if ($kept.Count -ne @($lines).Count) {
+                Set-Content -Path $modsFile -Value $kept
+                Write-Host "Disabled in mods.txt: $name"
+            }
+        }
+    }
+}
 
 foreach ($name in $modNames) {
     $src = Join-Path $repoRoot "mods\$name"

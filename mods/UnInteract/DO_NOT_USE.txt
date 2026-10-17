@@ -1,0 +1,5 @@
+UNDER DEVELOPMENT — DO NOT USE
+
+This mod soft-locks game input when closing UI panels.
+It is not deployed by Deploy-Mods.ps1 or Launch-Dragonwilds.bat.
+Use Escape in-game to leave interactions.

@@ -11,6 +11,7 @@ I want to create a suite of single-purpose RuneScape: Dragonwilds mods.
 
 - sort into nearby chests. when pressing Alt+` , all non-hotbar backpack items move into nearby chests that already contain the same items
 - auto eat (+ drink). when sustenance or hydration drops below 50, consume one matching food or drink from inventory
+- un-interact. when an interaction UI is already open, pressing E again dismisses it (vanilla forces Esc)
 
 # Plan
 
