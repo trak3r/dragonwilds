@@ -12,6 +12,7 @@ Single-purpose [UE4SS](https://www.nexusmods.com/runescapedragonwilds/mods/4) Lu
 |-----|-----------|---------|
 | [Sort Into Chests](mods/SortIntoChests) | **Alt+`** quick-stacks into chests that already hold that item | ~20 m; skips hotbar |
 | [Auto Eat](mods/AutoEat) | Eat/drink from inventory when bars drop below 50 | Sustenance / Hydration |
+| [Quick Launch](mods/QuickLaunch) | Auto-advance boot/menus into last character + world | Esc cancels |
 | [Un-Interact](mods/UnInteract) | ~~E to leave interactions~~ | **Under development — do not use** (not deployed) |
 
 Shared helpers live in [`common/`](common) and are copied into each mod on deploy.
@@ -47,6 +48,7 @@ Or deploy without launching:
 ```
 [TeflonTed.SortIntoChests] loaded ...
 [TeflonTed.AutoEat] loaded ...
+[TeflonTed.QuickLaunch] loaded ...
 ```
 
 ## Modding notes

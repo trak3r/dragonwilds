@@ -62,6 +62,7 @@ echo Launching: !EXE!
 echo Mods load from: !WIN64!\ue4ss\Mods
 echo   - SortIntoChests  (Alt+`)
 echo   - AutoEat
+echo   - QuickLaunch     (auto-continue last session; Esc cancels)
 echo.
 
 REM Start from Win64 so the dwmapi.dll UE4SS proxy loads with the shipping exe.
