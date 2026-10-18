@@ -34,7 +34,7 @@ local S = {
 }
 
 local function findFoodSlot(bag)
-    local last = math.min(Inv.BAG_MAIN_LAST, Inv.slotCount(bag) - 1)
+    local last = Inv.mainLast(bag)
     for i = 0, last do
         local ok, d, n = Inv.readSlot(bag, i)
         if ok and d and n and n > 0 and Food.isKind(d, "food") then
@@ -47,7 +47,7 @@ end
 local function logHotbarOnce(bag)
     if S.loggedSlots then return end
     S.loggedSlots = true
-    local last = math.min(Inv.BAG_MAIN_LAST, Inv.slotCount(bag) - 1)
+    local last = Inv.mainLast(bag)
     for i = 0, last do
         local ok, d, n = Inv.readSlot(bag, i)
         if ok and d and n and n > 0 then

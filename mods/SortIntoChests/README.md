@@ -8,6 +8,7 @@ Press **Alt+`** to quick-stack your backpack into nearby chests that already hol
 (Bare `` ` `` opens the UE4SS console when ConsoleEnabler is on.)
 
 - Hotbar (quick-action slots) is never touched
+- Scans the full backpack (`MaxSlotCount`), including the 4th row
 - Empty chests are never used as dump targets
 - ~20 m radius around you
 - Skips private chests and crafting-station inventories

@@ -2,8 +2,10 @@
 local U = require("teflonted.util")
 local M = {}
 
--- slots 0..NumberOfQuickActionSlots-1 = hotbar; 8-31 = main backpack (typical).
-M.BAG_MAIN_LAST = 31
+-- Hotbar = 0 .. NumberOfQuickActionSlots-1 (usually 8).
+-- Backpack continues after that for MaxSlotCount slots total.
+-- Was hardcoded to 31 (3 backpack rows); row 4 is slots 32–39 on a 40-slot bag.
+M.BAG_SLOT_HARD_MAX = 127
 
 function M.quickSlots(bag)
     local n = 0
@@ -18,6 +20,16 @@ function M.slotCount(inv)
     if type(m) ~= "number" or m <= 0 or m > 2000 then return 0 end
     return m
 end
+
+-- Last usable index on this inventory (respects MaxSlotCount; clamps nonsense).
+function M.mainLast(inv)
+    local n = M.slotCount(inv)
+    if n <= 0 then return -1 end
+    return math.min(n, M.BAG_SLOT_HARD_MAX + 1) - 1
+end
+
+-- Deprecated alias kept so older call sites keep working until updated.
+M.BAG_MAIN_LAST = 39
 
 function M.readSlot(inv, i)
     local it = nil

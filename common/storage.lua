@@ -57,7 +57,7 @@ end
 function M.sortIntoChests(pc, pawn, bag, chests)
     local moved = 0
     local skip = Inv.quickSlots(bag)
-    local last = math.min(Inv.BAG_MAIN_LAST, Inv.slotCount(bag) - 1)
+    local last = Inv.mainLast(bag)
     for i = skip, last do
         local ok, d = Inv.readSlot(bag, i)
         if ok and d then

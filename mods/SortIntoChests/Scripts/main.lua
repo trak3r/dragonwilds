@@ -2,7 +2,7 @@
 -- Hotkey ` deposits backpack stacks into nearby chests that already hold that item.
 
 local TAG = "[TeflonTed.SortIntoChests] "
-local VERSION = "1.0.0"
+local VERSION = "1.0.1"
 
 local function setupPath()
     local src = (debug.getinfo(1, "S").source or ""):gsub("^@", "")
