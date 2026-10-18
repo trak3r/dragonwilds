@@ -59,14 +59,19 @@ Or deploy without launching:
 - No Easy Anti-Cheat / BattlEye on this install. Steam **Verify integrity** can remove UE4SS files — reinstall the loader if that happens.
 - Sort moves use host authority (`MoveItem`). AutoEat uses `InventoryController:UseItemFromInventory` (works for packs from Open All; food/drink verified the same route).
 
+## Publishing (Nexus)
+
+Thunderstore has no Dragonwilds category. See [`NEXUS.md`](NEXUS.md). Player READMEs + 256×256 icons live in each mod’s `nexus/` folder; pack with `.\Pack-Nexus.ps1 -Mod <Name>`.
+
 ## Layout
 
 ```
 dragonwilds/
   common/                 shared Lua
-  mods/SortIntoChests/
-  mods/AutoEat/
+  mods/<Name>/            Scripts + nexus/ (README, icon, changelog)
   Deploy-Mods.ps1
+  Pack-Nexus.ps1
   Launch-Dragonwilds.bat
   Environment.ps1.example
+  NEXUS.md
 ```

@@ -5,6 +5,9 @@ Environment.ps1
 .tmp-*/
 .tmp-research/
 
+## Nexus / pack output (keep mods/*/nexus/ sources)
+dist/
+
 ## IDE / OS
 .vs/
 .idea/
