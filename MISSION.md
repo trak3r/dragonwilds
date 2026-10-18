@@ -13,6 +13,7 @@ I want to create a suite of single-purpose RuneScape: Dragonwilds mods.
 - auto eat (+ drink). when sustenance or hydration drops below 50, consume one matching food or drink from inventory
 - un-interact. when an interaction UI is already open, pressing E again dismisses it (vanilla forces Esc) — **shelved / do not use**
 - quick launch. on game start, auto-advance into the last character + world (vanilla defaults them but still makes you click through)
+- eat to heal. when health drops below ~20% (or ~40 HP), auto-eat food (post-0.12: food heals, potions gone)
 
 # Plan
 

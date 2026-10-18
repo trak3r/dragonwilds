@@ -62,6 +62,7 @@ echo Launching: !EXE!
 echo Mods load from: !WIN64!\ue4ss\Mods
 echo   - SortIntoChests  (Alt+`)
 echo   - AutoEat
+echo   - EatToHeal       (auto-eat food when HP low)
 echo   - QuickLaunch     (auto-continue last session; Esc cancels)
 echo.
 

@@ -39,7 +39,7 @@ if (-not (Test-Path $modsFile)) {
 }
 
 # UnInteract is under development / do not use — never deploy it.
-$modNames = @("SortIntoChests", "AutoEat", "QuickLaunch")
+$modNames = @("SortIntoChests", "AutoEat", "EatToHeal", "QuickLaunch")
 $disabledMods = @("UnInteract")
 $commonSrc = Join-Path $repoRoot "common"
 
