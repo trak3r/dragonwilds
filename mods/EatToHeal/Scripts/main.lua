@@ -4,8 +4,8 @@
 
 local TAG = "[TeflonTed.EatToHeal] "
 local VERSION = "1.0.0"
-local HP_FRACTION = 0.20   -- prefer 20% of max (scales with Constitution)
-local HP_ABSOLUTE = 40     -- fallback if MaxHealth unread
+local HP_FRACTION = 0.30   -- prefer 30% of max (scales with Constitution)
+local HP_ABSOLUTE = 50     -- fallback if MaxHealth unread
 local POLL_MS = 1000       -- attr reads only; safe to poll faster than AutoEat
 local USE_COOLDOWN = 2.25  -- game consume cooldown ~2s
 
