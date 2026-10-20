@@ -11,7 +11,7 @@ Thunderstore has **no** Dragonwilds community. Publish on [Nexus](https://www.ne
 | Eat to Heal | `mods/EatToHeal` | HP &lt; 30% / 50 |
 | Quick Launch | `mods/QuickLaunch` | Skip menus into last session |
 
-**Do not publish** `UnInteract` (soft-locks input).
+**Do not publish** `UnInteract` (soft-locks input). SpellCooldown was shelved (unreliable CD read/HUD).
 
 ## Per-mod Nexus kit
 
