@@ -9,6 +9,7 @@ Thunderstore has **no** Dragonwilds community. Publish on [Nexus](https://www.ne
 | Sort Into Chests | `mods/SortIntoChests` | Alt+` quick-stack |
 | Auto Eat | `mods/AutoEat` | Hunger/thirst &lt; 50 |
 | Eat to Heal | `mods/EatToHeal` | HP &lt; 30% / 50 |
+| Auto Potion | `mods/AutoPotion` | Antipoison when poisoned |
 | Quick Launch | `mods/QuickLaunch` | Skip menus into last session |
 
 **Do not publish** `UnInteract` (soft-locks input). SpellCooldown was shelved (unreliable CD read/HUD).
@@ -28,6 +29,7 @@ Each shippable mod has `mods/<Name>/nexus/`:
 .\Pack-Nexus.ps1 -Mod AutoEat
 .\Pack-Nexus.ps1 -Mod EatToHeal
 .\Pack-Nexus.ps1 -Mod QuickLaunch
+.\Pack-Nexus.ps1 -Mod AutoPotion
 ```
 
 Outputs under `dist/`:

@@ -64,6 +64,7 @@ echo   - SortIntoChests  (Alt+`)
 echo   - AutoEat
 echo   - EatToHeal       (auto-eat food when HP low)
 echo   - QuickLaunch     (auto-continue last session; Esc cancels)
+echo   - AutoPotion      (drink antipoison when poisoned)
 echo.
 
 REM Start from Win64 so the dwmapi.dll UE4SS proxy loads with the shipping exe.

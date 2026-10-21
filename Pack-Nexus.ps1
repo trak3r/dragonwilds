@@ -15,7 +15,7 @@
 #>
 param(
     [Parameter(Mandatory = $true)]
-    [ValidateSet("SortIntoChests", "AutoEat", "EatToHeal", "QuickLaunch")]
+    [ValidateSet("SortIntoChests", "AutoEat", "EatToHeal", "QuickLaunch", "AutoPotion")]
     [string] $Mod,
 
     [string] $Version

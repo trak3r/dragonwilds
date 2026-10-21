@@ -15,6 +15,7 @@ I want to create a suite of single-purpose RuneScape: Dragonwilds mods.
 - quick launch. on game start, auto-advance into the last character + world (vanilla defaults them but still makes you click through)
 - eat to heal. when health drops below ~30% (or ~50 HP), auto-eat food (post-0.12: food heals, potions gone)
 - ~~spell cooldown~~ — **abandoned** (magic components found; ActiveCooldowns not readable via UE4SS; HUD never showed live CDs)
+- auto potion. when poisoned, drink one antipoison potion from inventory (weakest first)
 
 # Plan
 

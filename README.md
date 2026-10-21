@@ -13,6 +13,7 @@ Single-purpose [UE4SS](https://www.nexusmods.com/runescapedragonwilds/mods/4) Lu
 | [Sort Into Chests](mods/SortIntoChests) | **Alt+`** quick-stacks into chests that already hold that item | ~20 m; skips hotbar |
 | [Auto Eat](mods/AutoEat) | Eat/drink from inventory when bars drop below 50 | Sustenance / Hydration |
 | [Eat to Heal](mods/EatToHeal) | Auto-eat food when HP drops below 30% max (or &lt;50) | Combat heal |
+| [Auto Potion](mods/AutoPotion) | Drink antipoison when Poison status is active | Weak → stronger |
 | [Quick Launch](mods/QuickLaunch) | Auto-advance boot/menus into last character + world | Esc cancels |
 | [Un-Interact](mods/UnInteract) | ~~E to leave interactions~~ | **Under development — do not use** (not deployed) |
 
@@ -51,6 +52,7 @@ Or deploy without launching:
 [TeflonTed.AutoEat] loaded ...
 [TeflonTed.EatToHeal] loaded ...
 [TeflonTed.QuickLaunch] loaded ...
+[TeflonTed.AutoPotion] loaded ...
 ```
 
 ## Modding notes
