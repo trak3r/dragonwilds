@@ -10,6 +10,8 @@ When the game applies the **Poison** status, automatically drink one **antipoiso
 
 Uses the weakest matching pot first (Weak → Lesser → Antipoison Potion) so stronger resistance is saved for swamp travel.
 
+Will **not** drink again while that dose’s resistance perk is still active (poison can rebuild under resist; another flask would be wasted).
+
 ## Why install it
 
 Poison ticks hard while you fumble for a flask. This clears it as soon as you’re poisoned — if you have a pot.
