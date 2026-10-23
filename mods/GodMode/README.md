@@ -4,11 +4,16 @@ Always-on combat invulnerability while this mod is loaded. **No hotkey. No poll 
 
 Applies once when you enter a world (KithMyTrainer #684 signatures), then does nothing.
 
-## Test plan (perf)
+## Enable / disable
 
-1. Play without this mod — note FPS feel.
-2. `GodMode : 1` in `mods.txt`, restart, load in — compare.
-3. Set `GodMode : 0` (or remove folder) to turn off.
+**Off by default** — `Deploy-Mods.ps1` / the launcher do not install it (listed in `$disabledMods`).
+
+To turn on for a tough fight:
+1. Add `"GodMode"` to `$modNames` in `Deploy-Mods.ps1` and remove it from `$disabledMods`.
+2. Run `Launch-Dragonwilds.bat` (or `.\Deploy-Mods.ps1`).
+3. Confirm `[TeflonTed.GodMode] ON (one-shot)` in `UE4SS.log`.
+
+To turn off again: put `GodMode` back in `$disabledMods` only, redeploy (script removes it from the game Mods folder).
 
 ## Credits
 
