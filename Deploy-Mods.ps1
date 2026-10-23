@@ -39,7 +39,7 @@ if (-not (Test-Path $modsFile)) {
 }
 
 # UnInteract is under development / do not use — never deploy it.
-$modNames = @("SortIntoChests", "AutoEat", "EatToHeal", "QuickLaunch", "AutoPotion")
+$modNames = @("SortIntoChests", "AutoEat", "EatToHeal", "QuickLaunch", "AutoPotion", "GodMode")
 # SpellCooldown abandoned (cooldown read/HUD never got reliable). UnInteract soft-locks input.
 $disabledMods = @("UnInteract", "SpellCooldown")
 $commonSrc = Join-Path $repoRoot "common"
