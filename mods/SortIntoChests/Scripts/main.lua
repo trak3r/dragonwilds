@@ -1,8 +1,9 @@
 -- Teflon Ted's Sort Into Chests — RuneScape: Dragonwilds (UE4SS)
--- Hotkey ` deposits backpack stacks into nearby chests that already hold that item.
+-- Hotkey: Shift+` (tilde ~) deposits backpack stacks into nearby chests that
+-- already hold that item. Bare ` stays with ConsoleEnabler; Alt stays with mounts.
 
 local TAG = "[TeflonTed.SortIntoChests] "
-local VERSION = "1.0.1"
+local VERSION = "1.1.2"
 
 local function setupPath()
     local src = (debug.getinfo(1, "S").source or ""):gsub("^@", "")
@@ -66,24 +67,23 @@ local function onHotkey()
     pending = true
 end
 
--- OEM_THREE is the `~ key on US keyboards (VK_OEM_3).
--- Bare tilde is claimed by ConsoleEnablerMod, so bind ALT+` (Valheim-adjacent, no console fight).
+-- OEM_THREE + Shift = ~ on US keyboards. Bare OEM_THREE (`) stays free for console.
 local key = (Key and (Key.OEM_THREE or Key.TILDE or Key.OEM_8)) or nil
-local alt = ModifierKey and ModifierKey.ALT
-if key and alt then
-    local ok = pcall(RegisterKeyBind, key, { alt }, function()
+local shift = ModifierKey and ModifierKey.SHIFT
+if key and shift then
+    local ok = pcall(RegisterKeyBind, key, { shift }, function()
         pcall(ExecuteInGameThread, onHotkey)
     end)
     if ok then
-        log("bound sort hotkey to ALT+` (OEM_THREE)")
+        log("bound sort hotkey to SHIFT+` (~)")
     else
-        log("could not bind ALT+` hotkey")
+        log("could not bind SHIFT+` hotkey")
     end
 elseif key then
     local ok = pcall(RegisterKeyBind, key, function()
         pcall(ExecuteInGameThread, onHotkey)
     end)
-    if ok then log("bound sort hotkey to OEM_THREE (no ModifierKey.ALT)") else log("could not bind hotkey") end
+    if ok then log("bound sort hotkey to OEM_THREE (no ModifierKey.SHIFT)") else log("could not bind hotkey") end
 else
     log("Key.OEM_THREE unavailable; sort hotkey not bound")
 end
@@ -112,4 +112,4 @@ if not okLoop then
     end)
 end
 
-log("loaded v" .. VERSION .. " — press ALT+` to sort into nearby chests")
+log("loaded v" .. VERSION .. " — press SHIFT+` (~) to sort into nearby chests")

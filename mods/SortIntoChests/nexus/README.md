@@ -6,7 +6,7 @@
 
 ## What it does
 
-Press **Alt+`** to quick-stack backpack items into nearby chests that already hold that item.
+Press **Shift+`** (**~**) to quick-stack backpack items into nearby chests that already hold that item.
 
 ## Why install it
 
@@ -17,7 +17,7 @@ Ends the click-fest of restocking a seeded storage room after a haul.
 1. Install [UE4SS for RSDragonwilds](https://www.nexusmods.com/runescapedragonwilds/mods/4).
 2. Extract this mod into `RSDragonwilds\Binaries\Win64\ue4ss\Mods\` (so you have `Mods\SortIntoChests\Scripts\main.lua`).
 3. Confirm `mods.txt` has `SortIntoChests : 1` (or leave `enabled.txt` in the mod folder).
-4. Stand near your chests (~20 m) and press **Alt+`**.
+4. Stand near your chests (~20 m) and press **Shift+`** (**~**).
 
 Hotbar is never touched. Empty chests are never used as dump targets. Private chests and crafting stations are skipped. Full backpack is scanned (including the 4th row).
 

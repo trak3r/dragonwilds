@@ -6,7 +6,7 @@ Thunderstore has **no** Dragonwilds community. Publish on [Nexus](https://www.ne
 
 | Mod | Folder | Notes |
 |-----|--------|--------|
-| Sort Into Chests | `mods/SortIntoChests` | Alt+` quick-stack |
+| Sort Into Chests | `mods/SortIntoChests` | Shift+` (~) quick-stack |
 | Auto Eat | `mods/AutoEat` | Hunger/thirst &lt; 50 |
 | Eat to Heal | `mods/EatToHeal` | HP &lt; 30% / 50 |
 | Auto Potion | `mods/AutoPotion` | Antipoison when poisoned |
