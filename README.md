@@ -10,7 +10,7 @@ Single-purpose [UE4SS](https://www.nexusmods.com/runescapedragonwilds/mods/4) Lu
 
 | Mod | One-liner | Trigger |
 |-----|-----------|---------|
-| [Sort Into Chests](mods/SortIntoChests) | **Shift+`** (**~**) quick-stacks into chests | ~20 m; skips hotbar |
+| [Sort Into Chests](mods/SortIntoChests) | ~~Shift+` quick-stacks into chests~~ | **Retired** — vanilla ledger item does this (not deployed) |
 | [Auto Eat](mods/AutoEat) | Eat/drink from inventory when bars drop below 50 | Sustenance / Hydration |
 | [Eat to Heal](mods/EatToHeal) | Auto-eat food when HP drops below 30% max (or &lt;50) | Combat heal |
 | [Auto Potion](mods/AutoPotion) | Drink antipoison when Poison status is active | Weak → stronger |
@@ -48,7 +48,6 @@ Or deploy without launching:
 4. Confirm in `Binaries\Win64\ue4ss\UE4SS.log`:
 
 ```
-[TeflonTed.SortIntoChests] loaded ...
 [TeflonTed.AutoEat] loaded ...
 [TeflonTed.EatToHeal] loaded ...
 [TeflonTed.QuickLaunch] loaded ...
