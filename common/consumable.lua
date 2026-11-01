@@ -69,6 +69,11 @@ function M.restoreAmounts(data)
         if v and v > hyd then hyd = v end
     end
     local blob = textBlob(data)
+    -- Name heuristics only for consumables: "fish" etc. also match tools (ITEM_FishingNet_*),
+    -- and using a tool from the bag equips it.
+    if not blob:find("consumable", 1, true) then
+        return sust, hyd
+    end
     -- Path / name heuristics when numeric fields aren't exposed to Lua.
     if sust <= 0 and blobHas(blob, { "food", "meal", "cooked", "meat", "fish", "bread", "stew", "ration", "berry", "fruit" }) then
         sust = 1
